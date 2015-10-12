@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:mvc="http://www.springframework.org/schema/mvc"
+  xmlns:ws="http://jax-ws.dev.java.net/spring/core"
+  xmlns:wss="http://jax-ws.dev.java.net/spring/servlet"
+  xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+      http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+      http://jax-ws.dev.java.net/spring/core
+      http://jax-ws.java.net/spring/core.xsd
+      http://jax-ws.dev.java.net/spring/servlet
+      http://jax-ws.java.net/spring/servlet.xsd">
+
+<mvc:annotation-driven/>
+<context:component-scan base-package="com.socialmedia" />
+
+ <!--  
+<context:component-scan base-package="com.smhub" />
+
+<wss:binding url="/timeline">
+        <wss:service>
+            <ws:service bean="#timelineWs"/>
+        </wss:service>
+    </wss:binding>
+
+
+    <bean id="timelineWs" class="com.socialmedia.webservice.TimelineWebService">
+    	<property name="timelineWebserviceBo" ref="TimelineWebserviceBo" />
+    </bean>
+    
+    <bean id="TimelineWebserviceBo" class="com.socialmedia.webservice.TimelineWebserviceImpl" />
+-->
+<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+  <property name="prefix" value="/WEB-INF/jsp/" />
+  <property name="suffix" value=".jsp" />
+</bean>
+
+<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+  <property name="basename" value="messages" />
+</bean>
+
+<bean id="socialMediaHub" class="com.socialmedia.model.SocialMediaHub"/>
+
+<bean id="postTwt" class="com.socialmedia.PostToTwitter"/>
+<!--  
+	<property name="util" ref="hubUtil" />
+</bean>
+-->
+<bean id="hubUtil" class="com.socialmedia.SocialHubUtility"/>
+
+<bean id="readFromTwitter" class="com.socialmedia.ReadFromTwitter"/>
+
+</beans>
